@@ -1,3 +1,23 @@
+# By default, LangGraph Cloud relies on LangSmith API keys passed
+# via the x-api-key header to verify incoming requests.
+ 
+# For production web apps, you can bypass this default and handle Custom Authentication.
+
+# Authentication:
+# Using the native Auth primitives, you register a global authentication middleware handler.
+
+# Any request failing this check is immediately blocked at the entry point with an HTTP error.
+# See get_current_user() below for an example of how to implement a custom authentication flow.
+
+# Authorization:
+# Once a user is verified, you must prevent them from interacting
+# with threads, assistants, or cron jobs that belong to someone else.
+# LangGraph provides fine-grained, decorator-driven event handlers
+# to manage resource-level access control.
+
+# You can apply logic globally or drill down to specific resources like threads.
+# See secure_thread isolation() below for an example of how to implement a custom authorization flow.
+
 from langgraph_sdk.auth import Auth, is_studio_user
 
 # Mock database of accepted bearer tokens for local validation testing
